@@ -173,7 +173,11 @@ export default function CheckoutPage() {
   const handleSubmit = async () => {
     setIsProcessing(true)
     try {
-      const origin = typeof window !== 'undefined' ? window.location.origin : ''
+      // Use NEXT_PUBLIC_APP_URL in production (e.g. Railway) so redirects go to the deployed URL, not localhost
+      const baseUrl =
+        typeof window !== 'undefined'
+          ? (process.env.NEXT_PUBLIC_APP_URL || window.location.origin)
+          : (process.env.NEXT_PUBLIC_APP_URL || '')
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -184,8 +188,8 @@ export default function CheckoutPage() {
             amountCents: Math.round(item.priceSnap * 100),
             image: item.product.images[0]?.url,
           })),
-          successUrl: `${origin}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${origin}/checkout?canceled=1`,
+          successUrl: `${baseUrl}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+          cancelUrl: `${baseUrl}/checkout?canceled=1`,
           customerEmail: address.email || undefined,
           userId: user?.id ?? undefined,
         }),

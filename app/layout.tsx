@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   description: 'Electric bike sales, parts and mobile servicing across Australia.',
   keywords: ['electric bike sales', 'e-bikes', 'electric bikes', 'bike shop', 'parts', 'mobile servicing', 'VoltRide'],
   authors: [{ name: 'VoltRide' }],
+  icons: {
+    icon: '/apple-icon.png',
+    apple: '/apple-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_AU',
