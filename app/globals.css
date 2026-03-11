@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* VoltRide Design System - Dark Premium Industrial */
+:root {
+  /* Core VoltRide Colors */
+  --volt-black: #0b0b0e;
+  --volt-deep: #111118;
+  --volt-panel: #16161f;
+  --volt-border: rgba(255, 255, 255, 0.08);
+  --volt-white: #f5f5f0;
+  --volt-muted: #888899;
+  --volt-muted-bright: #e0e0e0;
+  --volt: #c8f135;
+  --volt-teal: #00d4a4;
+  --volt-orange: #ff5f2e;
+
+  /* Semantic tokens */
+  --background: var(--volt-black);
+  --foreground: var(--volt-white);
+  --card: var(--volt-panel);
+  --card-foreground: var(--volt-white);
+  --popover: var(--volt-deep);
+  --popover-foreground: var(--volt-white);
+  --primary: var(--volt);
+  --primary-foreground: var(--volt-black);
+  --secondary: var(--volt-panel);
+  --secondary-foreground: var(--volt-white);
+  --muted: var(--volt-deep);
+  --muted-foreground: var(--volt-muted);
+  --accent: var(--volt-teal);
+  --accent-foreground: var(--volt-black);
+  --destructive: var(--volt-orange);
+  --destructive-foreground: var(--volt-white);
+  --border: var(--volt-border);
+  --input: var(--volt-panel);
+  --ring: var(--volt);
+  --radius: 0.5rem;
+  
+  /* Chart colors */
+  --chart-1: var(--volt);
+  --chart-2: var(--volt-teal);
+  --chart-3: var(--volt-orange);
+  --chart-4: var(--volt-muted);
+  --chart-5: var(--volt-white);
+  
+  /* Sidebar */
+  --sidebar: var(--volt-deep);
+  --sidebar-foreground: var(--volt-white);
+  --sidebar-primary: var(--volt);
+  --sidebar-primary-foreground: var(--volt-black);
+  --sidebar-accent: var(--volt-panel);
+  --sidebar-accent-foreground: var(--volt-white);
+  --sidebar-border: var(--volt-border);
+  --sidebar-ring: var(--volt);
+}
+
+@theme inline {
+  --font-sans: 'DM Sans', 'Geist', sans-serif;
+  --font-mono: 'DM Mono', 'Geist Mono', monospace;
+  --font-display: 'Bebas Neue', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* VoltRide custom colors */
+  --color-volt: var(--volt);
+  --color-volt-black: var(--volt-black);
+  --color-volt-deep: var(--volt-deep);
+  --color-volt-panel: var(--volt-panel);
+  --color-volt-white: var(--volt-white);
+  --color-volt-muted: var(--volt-muted);
+  --color-volt-muted-bright: var(--volt-muted-bright);
+  --color-volt-teal: var(--volt-teal);
+  --color-volt-orange: var(--volt-orange);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--volt-deep);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--volt-panel);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--volt-muted);
+  }
+}
+
+@layer components {
+  /* VoltRide Marquee Animation */
+  .marquee-content {
+    animation: marquee 30s linear infinite;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Hover border glow effect */
+  .card-glow {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .card-glow:hover {
+    box-shadow: 0 0 20px rgba(200, 241, 53, 0.15);
+    border-color: rgba(200, 241, 53, 0.3);
+  }
+  
+  /* Volt text glow */
+  .text-glow {
+    text-shadow: 0 0 20px rgba(200, 241, 53, 0.5);
+  }
+  
+  /* Grid background pattern */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Hero bike float animation */
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  /* Hero bike: depth (drop-shadow + fade into background) */
+  .hero-bike-depth {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 32px rgba(234, 179, 8, 0.12));
+  }
+  .hero-badge-dot {
+    animation: led-pulse 2s ease-in-out infinite;
+  }
+  @keyframes led-pulse {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(200, 241, 53, 0.4);
+    }
+    50% {
+      opacity: 0.85;
+      box-shadow: 0 0 8px 2px rgba(200, 241, 53, 0.3);
+    }
+  }
+}
+
+@layer utilities {
+  /* Font display utility */
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
+}
