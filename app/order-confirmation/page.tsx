@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -9,7 +10,7 @@ import { Footer } from '@/components/layout/footer'
 import { Button } from '@/components/ui/button'
 import { useCartStore } from '@/lib/store'
 
-export default function OrderConfirmationPage() {
+function OrderConfirmationContent() {
   const searchParams = useSearchParams()
   const clearCart = useCartStore((s) => s.clearCart)
   const sessionId = searchParams.get('session_id')
@@ -134,5 +135,30 @@ export default function OrderConfirmationPage() {
 
       <Footer />
     </div>
+  )
+}
+
+function OrderConfirmationFallback() {
+  return (
+    <div className="min-h-screen bg-volt-black">
+      <Header />
+      <main className="pt-16">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
+          <div className="w-20 h-20 mx-auto rounded-full bg-volt/20 flex items-center justify-center mb-6">
+            <CheckCircle2 className="h-12 w-12 text-volt animate-pulse" />
+          </div>
+          <p className="text-volt-muted">Loading…</p>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+export default function OrderConfirmationPage() {
+  return (
+    <Suspense fallback={<OrderConfirmationFallback />}>
+      <OrderConfirmationContent />
+    </Suspense>
   )
 }
