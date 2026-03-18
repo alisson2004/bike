@@ -2,6 +2,7 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { CartSidebar } from '@/components/layout/cart-sidebar'
 import { HeroSection } from '@/components/home/hero-section'
+import { LocationSection } from '@/components/home/location-section'
 import { MarqueeStrip } from '@/components/home/marquee-strip'
 import { CategoriesSection } from '@/components/home/categories-section'
 import { FeaturedProductsSection } from '@/components/home/featured-products-section'
@@ -19,6 +20,9 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <HeroSection />
+
+        {/* Location / Visit us – prominent */}
+        <LocationSection />
         
         {/* Marquee Strip */}
         <MarqueeStrip />

@@ -75,36 +75,33 @@ export default function CheckoutPage() {
   const gst = getGst()
   const freeShipping = qualifiesForFreeShipping()
 
-  // Cart has at least one e-bike (not just parts/accessories) → offer pickup/delivery by arrangement
+  // E-bikes are pickup only; parts can ship via Australia Post
   const cartHasBikes = items.some(
     (item) => item.product.categoryId && item.product.categoryId !== 'cat-parts'
   )
 
-  // Base shipping rates (Australia Post etc.) for parts/accessories
   const baseRates = address.state
     ? shippingZones.find((z) => z.states.includes(address.state))?.rates ?? []
     : []
 
-  // When cart has bikes, add "Pickup or delivery by arrangement" as first option
-  const BIKE_ARRANGEMENT_ID = 'bike-pickup-delivery'
-  const shippingRates =
-    cartHasBikes && baseRates.length > 0
-      ? [
-          {
-            id: BIKE_ARRANGEMENT_ID,
-            zoneId: '',
-            name: 'Pickup or delivery by arrangement',
-            carrier: "We'll contact you to arrange",
-            price: 0,
-            estimatedDays: '—',
-          },
-          ...baseRates,
-        ]
-      : baseRates
+  const STORE_PICKUP_ID = 'store-pickup'
+  // When cart has any bike, only option is store pickup (no shipping for bikes)
+  const shippingRates = cartHasBikes
+    ? [
+        {
+          id: STORE_PICKUP_ID,
+          zoneId: '',
+          name: 'Store pickup',
+          carrier: 'Collect at our store',
+          price: 0,
+          estimatedDays: '—',
+        },
+      ]
+    : baseRates
 
   const selectedRate = shippingRates.find((r) => r.id === selectedShipping)
   const shippingCost =
-    selectedRate?.id === BIKE_ARRANGEMENT_ID
+    selectedRate?.id === STORE_PICKUP_ID
       ? 0
       : selectedRate
         ? freeShipping && selectedRate.isFreeOver && subtotal >= (selectedRate.isFreeOver ?? 0)
@@ -403,7 +400,9 @@ export default function CheckoutPage() {
                 <div className="bg-volt-panel rounded-lg border border-border p-6">
                   <h2 className="font-display text-xl text-volt-white mb-2">DELIVERY</h2>
                   <p className="text-sm text-volt-muted mb-6">
-                    Parts & accessories ship via Australia Post. E-bikes: pickup or delivery by arrangement — we&apos;ll contact you after your order.
+                    {cartHasBikes
+                      ? 'E-bikes are pickup only at our store. We\'ll confirm collection with you.'
+                      : 'Parts & accessories ship via Australia Post.'}
                   </p>
                   <div className="mb-4 p-4 bg-volt-deep rounded-lg">
                     <p className="text-sm text-volt-muted">Delivering to:</p>
@@ -421,9 +420,9 @@ export default function CheckoutPage() {
                     className="space-y-3"
                   >
                     {shippingRates.map((rate) => {
-                      const isBikeArrangement = rate.id === BIKE_ARRANGEMENT_ID
+                      const isStorePickup = rate.id === STORE_PICKUP_ID
                       const isFree =
-                        !isBikeArrangement &&
+                        !isStorePickup &&
                         freeShipping &&
                         rate.isFreeOver != null &&
                         subtotal >= rate.isFreeOver
@@ -450,10 +449,10 @@ export default function CheckoutPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            {isBikeArrangement || isFree ? (
+                            {isStorePickup || isFree ? (
                               <>
                                 <p className="font-semibold text-volt">FREE</p>
-                                {isFree && !isBikeArrangement && (rate.price ?? 0) > 0 && (
+                                {isFree && !isStorePickup && (rate.price ?? 0) > 0 && (
                                   <p className="text-xs text-volt-muted line-through">
                                     {formatPrice(rate.price ?? 0)}
                                   </p>

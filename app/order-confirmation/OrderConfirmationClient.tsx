@@ -80,9 +80,9 @@ export function OrderConfirmationContent() {
                     <Package className="h-5 w-5 text-volt" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-volt-white">Pickup or delivery</h3>
+                    <h3 className="font-semibold text-volt-white">Pickup or shipping</h3>
                     <p className="text-sm text-volt-muted">
-                      Parts ship via Australia Post. For e-bikes we&apos;ll contact you to arrange pickup or delivery.
+                      Parts ship via Australia Post. E-bikes: collect at our store (we&apos;ll confirm with you).
                     </p>
                   </div>
                 </div>

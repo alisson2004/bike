@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ProductCard } from '@/components/product/product-card'
@@ -15,6 +16,8 @@ const filters = [
 
 export function FeaturedProductsSection() {
   const [activeFilter, setActiveFilter] = useState('all')
+  const pathname = usePathname()
+  const isHome = pathname === '/'
   
   const featuredProducts = products.filter(p => p.isFeatured)
   const filteredProducts = activeFilter === 'all' 
@@ -28,16 +31,27 @@ export function FeaturedProductsSection() {
     <section className="py-16 lg:py-24 bg-volt-deep">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-          <div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-volt-white tracking-wide">
-              FEATURED BIKES
-            </h2>
-            <p className="mt-2 text-volt-muted max-w-xl">
-              Our most popular e-bikes. Mountain, city, cargo and folding.
-            </p>
-          </div>
-          <Button variant="outline" className="border-border text-volt-white hover:bg-volt-panel" asChild>
+        <div className="text-center mb-8">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-volt-white tracking-wide">
+            FEATURED BIKES
+          </h2>
+          <p className="mt-2 text-volt-muted max-w-xl mx-auto">
+            Our most popular e-bikes. Pickup at our store —{' '}
+            <Link
+              href="/#visit"
+              className="text-volt hover:text-volt/80"
+              onClick={(e) => {
+                if (isHome) {
+                  e.preventDefault()
+                  document.getElementById('visit')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}
+            >
+              get directions
+            </Link>
+            .
+          </p>
+          <Button variant="outline" className="border-border text-volt-white hover:bg-volt-panel mt-4" asChild>
             <Link href="/products">
               View all bikes
               <ArrowRight className="ml-2 h-4 w-4" />

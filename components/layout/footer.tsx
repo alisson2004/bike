@@ -66,10 +66,15 @@ export function Footer() {
                 <Phone className="h-4 w-4" />
                 1300 VOLTRIDE
               </a>
-              <div className="flex items-center gap-2 text-volt-muted">
+              <a
+                href="https://www.google.com/maps/place/27%C2%B027'36.6%22S+153%C2%B002'11.6%22E/@-27.4601596,153.0339748,1012m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d-27.4601596!4d153.0365497!18m1!1e1?entry=ttu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-volt-muted hover:text-volt transition-colors"
+              >
                 <MapPin className="h-4 w-4" />
-                Sydney, Australia
-              </div>
+                Get directions · Our store
+              </a>
             </div>
 
             {/* Social Links */}

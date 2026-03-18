@@ -2,16 +2,24 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { ArrowRight, Users, Shield, Truck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const stats = [
   { icon: Users, value: '500+', label: 'Happy Riders' },
   { icon: Shield, value: 'Insured', label: 'Included' },
-  { icon: Truck, value: 'Pickup', label: 'or delivery by request' },
+  { icon: Truck, value: 'Store', label: 'pickup' },
 ]
 
+function scrollToVisit() {
+  document.getElementById('visit')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 export function HeroSection() {
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image – lighter overlay, radial so centre (bike) stays visible */}
@@ -37,22 +45,19 @@ export function HeroSection() {
           {/* Badge – no border, dot with LED pulse, premium letter-spacing */}
           <div className="inline-flex items-center gap-2 mb-6">
             <span className="h-2 w-2 rounded-full bg-volt hero-badge-dot" />
-            <span className="text-sm text-volt font-medium tracking-widest uppercase">E-bikes, parts & mobile service</span>
+            <span className="text-sm text-volt font-medium tracking-widest uppercase">Parts online · Bikes by pickup · Visit us</span>
           </div>
 
-          {/* Heading – no mini bike for cleaner focus on CTA and background product */}
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-volt-white leading-none tracking-wide">
             RIDE THE
             <br />
             <span className="text-volt text-glow">FUTURE</span>
           </h1>
 
-          {/* Subheading – lighter for readability */}
           <p className="mt-6 text-lg sm:text-xl max-w-lg leading-relaxed mx-auto text-[#E0E0E0]">
-            Buy high-performance e-bikes and parts. Parts ship via Australia Post; bikes pickup or delivery by arrangement. Mobile servicing available.
+            Shop parts online. E-bikes available for pickup at our store. Come visit or get mobile servicing.
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 mt-8 justify-center">
             <Button
               size="lg"
@@ -60,8 +65,26 @@ export function HeroSection() {
               asChild
             >
               <Link href="/products">
-                Shop e-bikes
+                Shop parts & bikes
                 <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-white/25 text-volt-white hover:bg-volt-panel hover:border-white/40 font-semibold text-base px-8"
+              asChild
+            >
+              <Link
+                href="/#visit"
+                onClick={(e) => {
+                  if (isHome) {
+                    e.preventDefault()
+                    scrollToVisit()
+                  }
+                }}
+              >
+                Visit us
               </Link>
             </Button>
             <Button

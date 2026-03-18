@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import { Package, Bike, Mail } from 'lucide-react'
+import { Package, Bike, Mail, MapPin } from 'lucide-react'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Button } from '@/components/ui/button'
+
+const STORE_MAPS_URL = 'https://www.google.com/maps/place/27%C2%B027\'36.6%22S+153%C2%B002\'11.6%22E/@-27.4601596,153.0339748,1012m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d-27.4601596!4d153.0365497!18m1!1e1?entry=ttu'
 
 export default function ShippingPage() {
   return (
@@ -14,10 +16,32 @@ export default function ShippingPage() {
             PICKUP & DELIVERY
           </h1>
           <p className="text-volt-muted mb-10">
-            How we get your order to you across Australia.
+            Parts ship Australia-wide. E-bikes are pickup only at our store.
           </p>
 
           <div className="space-y-10">
+            {/* Store location – prominent */}
+            <section className="bg-volt-panel rounded-xl border-2 border-volt/30 p-6 lg:p-8">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-volt/20 rounded-lg flex-shrink-0">
+                  <MapPin className="h-6 w-6 text-volt" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="font-display text-xl text-volt-white mb-2">
+                    Our store
+                  </h2>
+                  <p className="text-volt-muted mb-4">
+                    Visit us to try e-bikes, collect your order, or browse parts in person.
+                  </p>
+                  <Button className="bg-volt text-volt-black hover:bg-volt/90" asChild>
+                    <a href={STORE_MAPS_URL} target="_blank" rel="noopener noreferrer">
+                      Get directions
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </section>
+
             {/* Parts & accessories */}
             <section className="bg-volt-panel rounded-lg border border-border p-6 lg:p-8">
               <div className="flex items-start gap-4">
@@ -29,16 +53,16 @@ export default function ShippingPage() {
                     Parts & accessories
                   </h2>
                   <p className="text-volt-muted mb-3">
-                    Small items (parts, accessories, components) are sent via <strong className="text-volt-white">Australia Post</strong> to all Australian states and territories. Standard and express options are available at checkout; free shipping may apply on larger orders.
+                    Small items ship via <strong className="text-volt-white">Australia Post</strong> Australia-wide. Standard and express at checkout; free shipping may apply on larger orders.
                   </p>
                   <p className="text-sm text-volt-muted">
-                    Delivery times vary by location (typically 3–7 business days standard). We&apos;ll send tracking once your order is dispatched.
+                    Typically 3–7 business days. We&apos;ll send tracking once dispatched.
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* E-bikes */}
+            {/* E-bikes – pickup only */}
             <section className="bg-volt-panel rounded-lg border border-border p-6 lg:p-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-volt/10 rounded-lg flex-shrink-0">
@@ -49,10 +73,10 @@ export default function ShippingPage() {
                     E-bikes
                   </h2>
                   <p className="text-volt-muted mb-3">
-                    E-bikes are available by <strong className="text-volt-white">pickup</strong> or <strong className="text-volt-white">delivery by arrangement</strong>. We don&apos;t ship bikes via standard courier; after you order, we&apos;ll contact you to confirm either collection from our location or a delivery option (e.g. dedicated transport) and timing.
+                    E-bikes are <strong className="text-volt-white">pickup only</strong> at our store. We don&apos;t ship bikes; you order online and collect in person.
                   </p>
                   <p className="text-sm text-volt-muted">
-                    This keeps bikes safe and lets us align with your schedule. Questions? Get in touch before ordering.
+                    Get directions above to plan your visit.
                   </p>
                 </div>
               </div>
@@ -60,13 +84,19 @@ export default function ShippingPage() {
 
             <section className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button className="bg-volt text-volt-black hover:bg-volt/90" asChild>
+                <a href={STORE_MAPS_URL} target="_blank" rel="noopener noreferrer">
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Get directions
+                </a>
+              </Button>
+              <Button variant="outline" className="border-border text-volt-white hover:bg-volt-panel" asChild>
                 <Link href="/contact">
                   <Mail className="mr-2 h-4 w-4" />
                   Contact us
                 </Link>
               </Button>
               <Button variant="outline" className="border-border text-volt-white hover:bg-volt-panel" asChild>
-                <Link href="/products">Shop e-bikes & parts</Link>
+                <Link href="/products">Shop parts & bikes</Link>
               </Button>
             </section>
           </div>

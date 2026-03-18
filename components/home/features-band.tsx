@@ -3,8 +3,8 @@ import { Truck, Shield, CreditCard, Wrench } from 'lucide-react'
 const features = [
   {
     icon: Truck,
-    title: 'Delivery & pickup',
-    description: 'Parts via Australia Post; bikes pickup or by arrangement',
+    title: 'Parts ship · Bikes pickup',
+    description: 'Parts via Australia Post; e-bikes pickup at store only',
   },
   {
     icon: Shield,

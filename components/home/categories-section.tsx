@@ -8,18 +8,16 @@ export function CategoriesSection() {
     <section className="py-16 lg:py-24 bg-volt-black">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-          <div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-volt-white tracking-wide">
-              SHOP BY CATEGORY
-            </h2>
-            <p className="mt-2 text-volt-muted max-w-xl">
-              Find the right bike or part. Mountain, city, cargo, folding and accessories.
-            </p>
-          </div>
-          <Link 
-            href="/products" 
-            className="inline-flex items-center text-volt hover:text-volt/80 transition-colors font-medium"
+        <div className="text-center mb-10">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-volt-white tracking-wide">
+            SHOP BY CATEGORY
+          </h2>
+          <p className="mt-2 text-volt-muted max-w-xl mx-auto">
+            Find the right bike or part. Mountain, city, cargo, folding and accessories.
+          </p>
+          <Link
+            href="/products"
+            className="inline-flex items-center text-volt hover:text-volt/80 transition-colors font-medium mt-4"
           >
             View all
             <ArrowRight className="ml-2 h-4 w-4" />
