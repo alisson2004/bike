@@ -18,7 +18,7 @@ const footerLinks = {
   ],
   company: [
     { name: 'About', href: '/about' },
-    { name: 'Business / Fleet', href: '/b2b' },
+    { name: 'Whosales / Fleet', href: '/whosales' },
     { name: 'Careers', href: '/careers' },
     { name: 'Press', href: '/press' },
   ],
@@ -39,15 +39,15 @@ export function Footer() {
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-1 mb-4">
               <span className="font-display text-2xl tracking-wider text-volt-white">
-                VOLT
+                VINXS
               </span>
               <span className="h-2 w-2 rounded-full bg-volt" />
               <span className="font-display text-2xl tracking-wider text-volt-white">
-                RIDE
+                BIKES
               </span>
             </Link>
             <p className="text-volt-muted text-sm mb-6 max-w-xs">
-              Electric bike sales, parts and mobile servicing across Australia. Ride with VoltRide.
+              Electric bike sales, parts and mobile servicing across Australia. Ride with Vinxs Bikes.
             </p>
             
             {/* Contact Info */}
@@ -111,7 +111,7 @@ export function Footer() {
 
           {/* Shop Links */}
           <div>
-            <h3 className="font-semibold text-volt-white mb-4">Rent</h3>
+            <h3 className="font-semibold text-volt-white mb-4">Bikes</h3>
             <ul className="space-y-2">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
@@ -184,7 +184,7 @@ export function Footer() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-volt-muted">
-              &copy; {new Date().getFullYear()} VoltRide Australia. All rights reserved.
+              &copy; {new Date().getFullYear()} Vinxs Bikes Australia. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <span className="text-sm text-volt-muted">

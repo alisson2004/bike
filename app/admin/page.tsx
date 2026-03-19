@@ -106,9 +106,9 @@ export default function AdminDashboardPage() {
           {/* Logo */}
           <div className="p-4 border-b border-border">
             <Link href="/admin" className="flex items-center gap-1">
-              <span className="font-display text-xl tracking-wider text-volt-white">VOLT</span>
+              <span className="font-display text-xl tracking-wider text-volt-white">VINXS</span>
               <span className="h-2 w-2 rounded-full bg-volt" />
-              <span className="font-display text-xl tracking-wider text-volt-white">RIDE</span>
+              <span className="font-display text-xl tracking-wider text-volt-white">BIKES</span>
               <Badge className="ml-2 bg-volt/20 text-volt text-xs">Admin</Badge>
             </Link>
           </div>

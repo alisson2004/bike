@@ -71,9 +71,9 @@ export default function LoginPage() {
       {/* Header */}
       <header className="p-4 lg:p-6">
         <Link href="/" className="flex items-center gap-1 w-fit">
-          <span className="font-display text-2xl tracking-wider text-volt-white">VOLT</span>
+          <span className="font-display text-2xl tracking-wider text-volt-white">VINXS</span>
           <span className="h-2 w-2 rounded-full bg-volt" />
-          <span className="font-display text-2xl tracking-wider text-volt-white">RIDE</span>
+          <span className="font-display text-2xl tracking-wider text-volt-white">BIKES</span>
         </Link>
       </header>
 
@@ -82,7 +82,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <h1 className="font-display text-3xl text-volt-white tracking-wide">WELCOME BACK</h1>
-            <p className="text-volt-muted mt-2">Sign in to your VoltRide account</p>
+            <p className="text-volt-muted mt-2">Sign in to your Vinxs Bikes account</p>
           </div>
 
           <div className="bg-volt-panel rounded-lg border border-border p-6 lg:p-8">

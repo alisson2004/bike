@@ -100,7 +100,19 @@ export function ProductsPageContent() {
   const hasActiveFilters = selectedCategory || selectedStatuses.length > 0
   const activeCategory = categories.find(c => c.slug === selectedCategory)
 
-  const FilterContent = () => (
+  const FilterContent = () => {
+    const partsParentId = 'cat-parts'
+    const isPartsView =
+      !!activeCategory && (activeCategory.id === partsParentId || activeCategory.parentId === partsParentId)
+    const visibleCategories = isPartsView
+      ? categories
+          .filter(c => c.parentId === partsParentId)
+          .sort((a, b) => a.sortOrder - b.sortOrder)
+      : categories
+          .filter(c => c.id !== partsParentId && c.parentId !== partsParentId)
+          .sort((a, b) => a.sortOrder - b.sortOrder)
+
+    return (
     <div className="space-y-6">
       <div>
         <h4 className="font-semibold text-volt-white mb-3">Categories</h4>
@@ -114,7 +126,7 @@ export function ProductsPageContent() {
           >
             All
           </button>
-          {categories.map((cat) => (
+          {visibleCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.slug)}
@@ -156,6 +168,7 @@ export function ProductsPageContent() {
       )}
     </div>
   )
+  }
 
   return (
     <div className="min-h-screen bg-volt-black">

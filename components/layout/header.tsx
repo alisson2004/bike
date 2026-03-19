@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -24,20 +25,28 @@ import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
 const navigation = [
-  { name: 'Rent', href: '/products' },
-  { 
-    name: 'Categories', 
+  { name: 'Bikes', href: '/products' },
+  {
+    name: 'Parts',
     href: '#',
     children: [
-      { name: 'Mountain', href: '/products?category=mountain-ebikes' },
-      { name: 'City', href: '/products?category=city-commuters' },
-      { name: 'Cargo', href: '/products?category=cargo-ebikes' },
-      { name: 'Folding', href: '/products?category=folding-ebikes' },
-      { name: 'Accessories', href: '/products?category=parts-accessories' },
+      { name: 'Frame', href: '/products?category=frame', imageUrl: '/equipamentos/Screenshot%202025-12-27%20232734.png' },
+      { name: 'Wheel', href: '/products?category=wheel', imageUrl: '/equipamentos/original__4_-removebg.png' },
+      { name: 'Tires', href: '/products?category=tires', imageUrl: '/equipamentos/Screenshot%202025-12-27%20235716.png' },
+      { name: 'Brakes', href: '/products?category=brakes', imageUrl: '/equipamentos/Screenshot%202025-12-27%20233417.png' },
+      { name: 'Suspention', href: '/products?category=suspention', imageUrl: '/equipamentos/Screenshot%202025-12-27%20235416.png' },
+      { name: 'Mudguards', href: '/products?category=mudguards', imageUrl: '/equipamentos/Screenshot%202025-12-27%20232734.png' },
+      { name: 'Keys', href: '/products?category=keys', imageUrl: '/equipamentos/Screenshot%202025-12-27%20234335.png' },
+      { name: 'Saddle', href: '/products?category=saddle', imageUrl: '/equipamentos/Screenshot%202025-12-27%20235416.png' },
+      { name: 'Chain', href: '/products?category=chain', imageUrl: '/equipamentos/Screenshot%202025-12-27%20235716.png' },
+      { name: 'Freewheel', href: '/products?category=freewheel', imageUrl: '/equipamentos/Screenshot%202025-12-27%20235716.png' },
+      { name: 'Headset', href: '/products?category=headset', imageUrl: '/equipamentos/Screenshot%202025-12-27%20235416.png' },
+      { name: 'Eletric', href: '/products?category=eletric', imageUrl: '/equipamentos/Screenshot%202025-12-27%20234056.png' },
+      { name: 'Assessories', href: '/products?category=assessories', imageUrl: '/equipamentos/Screenshot%202025-12-27%20233632.png' },
     ]
   },
-  { name: 'About', href: '/about' },
-  { name: 'Business', href: '/b2b' },
+  { name: 'Rent', href: '/rent' },
+  { name: 'Whosales', href: '/whosales' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -72,11 +81,11 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1">
             <span className="font-display text-2xl tracking-wider text-volt-white">
-              VOLT
+              VINXS
             </span>
             <span className="h-2 w-2 rounded-full bg-volt" />
             <span className="font-display text-2xl tracking-wider text-volt-white">
-              RIDE
+              BIKES
             </span>
           </Link>
 
@@ -96,7 +105,18 @@ export function Header() {
                           href={child.href}
                           className="text-volt-white hover:text-volt cursor-pointer"
                         >
-                          {child.name}
+                          <span className="flex items-center gap-2">
+                            {child.imageUrl ? (
+                              <Image
+                                src={child.imageUrl}
+                                alt={child.name}
+                                width={20}
+                                height={20}
+                                className="h-5 w-5 object-contain rounded"
+                              />
+                            ) : null}
+                            {child.name}
+                          </span>
                         </Link>
                       </DropdownMenuItem>
                     ))}
@@ -132,7 +152,7 @@ export function Header() {
                       Hi, {user.firstName}
                       {user.role === 'WHOLESALE' && (
                         <Badge variant="outline" className="ml-2 border-volt text-volt text-xs">
-                          Business
+                          Whosales
                         </Badge>
                       )}
                     </div>
@@ -181,8 +201,8 @@ export function Header() {
                     </DropdownMenuItem>
                     <DropdownMenuSeparator className="bg-border" />
                     <DropdownMenuItem asChild>
-                      <Link href="/b2b" className="cursor-pointer text-volt">
-                        Business / Fleet
+                      <Link href="/whosales" className="cursor-pointer text-volt">
+                        Whosales / Fleet
                       </Link>
                     </DropdownMenuItem>
                   </>
@@ -236,7 +256,18 @@ export function Header() {
                         className="block px-8 py-2 text-sm text-[#E0E0E0] hover:text-volt-white hover:bg-volt-panel transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        {child.name}
+                        <span className="flex items-center gap-2">
+                          {child.imageUrl ? (
+                            <Image
+                              src={child.imageUrl}
+                              alt={child.name}
+                              width={18}
+                              height={18}
+                              className="h-4 w-4 object-contain rounded"
+                            />
+                          ) : null}
+                          {child.name}
+                        </span>
                       </Link>
                     ))}
                   </div>

@@ -26,7 +26,9 @@ export function CategoriesSection() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {categories.map((category) => (
+          {categories
+            .filter(category => category.id !== 'cat-parts' && !category.parentId)
+            .map((category) => (
             <Link
               key={category.id}
               href={`/products?category=${category.slug}`}
