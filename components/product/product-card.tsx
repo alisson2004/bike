@@ -111,6 +111,15 @@ export function ProductCard({ product, showWholesalePrice, wholesalePrice }: Pro
           ))}
         </div>
 
+        {/* Short description */}
+        {(product.shortDesc || product.description) && (
+          <p className="text-sm text-volt-muted mt-3 line-clamp-2">
+            {product.shortDesc
+              ? product.shortDesc
+              : `${product.description.slice(0, 140)}${product.description.length > 140 ? '...' : ''}`}
+          </p>
+        )}
+
         {/* Price & Book */}
         <div className="flex items-end justify-between mt-4">
           <div>

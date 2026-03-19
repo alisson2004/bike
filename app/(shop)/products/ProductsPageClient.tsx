@@ -24,9 +24,10 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Checkbox } from '@/components/ui/checkbox'
-import { products, categories } from '@/lib/data'
+import { categories } from '@/lib/data'
 import { cn } from '@/lib/utils'
 import type { ProductStatus } from '@/lib/types'
+import { useRuntimeProducts } from '@/lib/runtime-products'
 
 const statusOptions: { value: ProductStatus; label: string }[] = [
   { value: 'IN_STOCK', label: 'Available' },
@@ -43,6 +44,7 @@ const sortOptions = [
 ]
 
 export function ProductsPageContent() {
+  const { products: runtimeProducts } = useRuntimeProducts()
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
 
@@ -53,7 +55,7 @@ export function ProductsPageContent() {
   const [filtersOpen, setFiltersOpen] = useState(false)
 
   const filteredProducts = useMemo(() => {
-    let result = [...products].filter(p => p.status !== 'ARCHIVED')
+    let result = [...runtimeProducts].filter(p => p.status !== 'ARCHIVED')
     if (selectedCategory) {
       const category = categories.find(c => c.slug === selectedCategory)
       if (category) result = result.filter(p => p.categoryId === category.id)
@@ -83,7 +85,7 @@ export function ProductsPageContent() {
         })
     }
     return result
-  }, [selectedCategory, selectedStatuses, sortBy])
+  }, [runtimeProducts, selectedCategory, selectedStatuses, sortBy])
 
   const toggleStatus = (status: ProductStatus) => {
     setSelectedStatuses(prev =>

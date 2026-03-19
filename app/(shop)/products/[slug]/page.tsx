@@ -26,9 +26,10 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Separator } from '@/components/ui/separator'
 import { useCartStore, useAuthStore } from '@/lib/store'
-import { getProductBySlug, formatPrice, products, getProductReviews } from '@/lib/data'
+import { formatPrice, getProductReviews } from '@/lib/data'
 import { toast } from 'sonner'
 import type { ProductStatus } from '@/lib/types'
+import { useRuntimeProducts } from '@/lib/runtime-products'
 
 const statusStyles: Record<ProductStatus, { label: string; className: string }> = {
   IN_STOCK: { label: 'In Stock', className: 'bg-volt-teal/20 text-volt-teal border-volt-teal/30' },
@@ -41,7 +42,8 @@ const statusStyles: Record<ProductStatus, { label: string; className: string }> 
 export default function ProductDetailPage() {
   const params = useParams()
   const slug = params.slug as string
-  const product = getProductBySlug(slug)
+  const { products: runtimeProducts, isLoaded } = useRuntimeProducts()
+  const product = runtimeProducts.find(p => p.slug === slug)
 
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
@@ -50,6 +52,7 @@ export default function ProductDetailPage() {
   const { user } = useAuthStore()
   
   if (!product) {
+    if (!isLoaded) return null
     notFound()
   }
 
@@ -70,7 +73,7 @@ export default function ProductDetailPage() {
   const isComingSoon = product.status === 'COMING_SOON'
 
   // Related products
-  const relatedProducts = products
+  const relatedProducts = runtimeProducts
     .filter(p => p.categoryId === product.categoryId && p.id !== product.id)
     .slice(0, 3)
 
